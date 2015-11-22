@@ -1,0 +1,12 @@
+{
+  "name": "poetism",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify src/index.js -d --s app -u crypto | uglifyjs > build/main.js"
+  },
+  "author": "Kevin Chapelier <kevin.chapelier@gmail.com> (http://www.kchapelier.com/)",
+  "license": "ISC"
+}
