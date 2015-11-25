@@ -40,6 +40,12 @@ var dataCatalogue = {
             name: 'V. Hugo (extracts from La Légende des Siècles)',
             lang: 'fr-FR',
             generate: null
+        },
+        decastro: {
+            file: './data/decastro.json',
+            name: 'R. de Castro (selected poems)',
+            lang: 'es-ES',
+            generate: null
         }
     },
     get: function (id, callback) {

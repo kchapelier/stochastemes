@@ -11,16 +11,21 @@ var app = {
         this.speakerElement = document.getElementsByClassName('speaker')[0];
 
         this.selectedCorpus = null;
-        this.voiced = true;
         this.running = true;
 
         var self = this;
 
-        this.speakerElement.addEventListener('click', function (e) {
-            self.voiced = !self.voiced;
+        if (speak.supported) {
+            this.voiced = true;
+            this.speakerElement.addEventListener('click', function (e) {
+                self.voiced = !self.voiced;
 
-            self.speakerElement.className = 'speaker' + (self.voiced ? '' : ' mute');
-        });
+                self.speakerElement.className = 'speaker' + (self.voiced ? '' : ' mute');
+            });
+        } else {
+            this.voiced = false;
+            this.speakerElement.style.display = 'none';
+        }
 
         this.corpusElement.addEventListener('click', function (e) {
             var corpusId = e.target.getAttribute('data-corpus-id');
