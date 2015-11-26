@@ -12,7 +12,37 @@ var app = {
 
         this.selectedCorpus = null;
         this.running = true;
+        this.voiced = speak.supported;
 
+        this.setEvents();
+
+        this.selectCorpus('baudelaire');
+    },
+    selectCorpus: function (id) {
+        for (var i = 0; i < this.corpusChoices.length; i++) {
+            this.corpusChoices[i].className = (this.corpusChoices[i].getAttribute('data-corpus-id') === id ? 'selected' : '');
+        }
+
+        var self = this;
+
+        this.selectedCorpus = null;
+
+        dataCatalogue.get(id, function (error, corpus) {
+            self.selectedCorpus = corpus;
+        });
+    },
+    next: function () {
+        if (this.selectedCorpus) {
+            var text = this.selectedCorpus.generate(this.selectedCorpus.minWidth + (Math.pow(Math.random(), 1.2) * (this.selectedCorpus.addWidth + 1)) | 0);
+
+            if (this.voiced) {
+                speak.speak(text, this.selectedCorpus.lang);
+            }
+
+            this.generationElement.innerHTML = text[0].toUpperCase() + text.substr(1);
+        }
+    },
+    setEvents: function () {
         var self = this;
 
         if (speak.supported) {
@@ -35,8 +65,6 @@ var app = {
             }
         });
 
-        this.selectCorpus('baudelaire');
-
         setInterval(function () {
             if (self.running) {
                 self.next();
@@ -44,30 +72,6 @@ var app = {
         }, 2500);
 
         this.observePageVisibility();
-    },
-    selectCorpus: function (id) {
-        for (var i = 0; i < this.corpusChoices.length; i++) {
-            this.corpusChoices[i].className = (this.corpusChoices[i].getAttribute('data-corpus-id') === id ? 'selected' : '');
-        }
-
-        var self = this;
-
-        this.selectedCorpus = null;
-
-        dataCatalogue.get(id, function (error, corpus) {
-            self.selectedCorpus = corpus;
-        });
-    },
-    next: function () {
-        if (this.selectedCorpus) {
-            var text = this.selectedCorpus.generate(7 + (Math.pow(Math.random(), 1.2) * 6) | 0);
-
-            if (this.voiced) {
-                speak.speak(text, this.selectedCorpus.lang);
-            }
-
-            this.generationElement.innerHTML = text[0].toUpperCase() + text.substr(1);
-        }
     },
     observePageVisibility: function () {
         var self = this;
