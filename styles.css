@@ -1,0 +1,151 @@
+body {
+    background:black;
+    color:white;
+    font-family: 'Esteban', serif;
+    font-weight:400;
+    margin:0;
+    padding:0;
+}
+
+h1 {
+    font-family: 'Lusitana', serif;
+    font-weight:400;
+    font-size:39px;
+    letter-spacing:1px;
+    margin:0;
+    padding:10% 0 0 0;
+    text-align:center;
+}
+
+h1 span {
+    opacity:0.6;
+}
+
+h2 {
+    font-weight:400;
+    font-size:13px;
+    margin:0;
+    padding:0;
+    opacity:0.6;
+    text-align:center;
+}
+
+.main {
+    display:none;
+}
+
+.generation {
+    position:relative;
+    background:#FFF;
+    color:#000;
+    text-shadow:0 0 2px #999;
+    font-size:38px;
+    letter-spacing:1px;
+    margin:50px 0 40px 0;
+    padding:30px;
+    text-align:center;
+}
+
+.corpus-catalogue {
+    margin: 0 auto;
+    padding:0 0 35px 0;
+    max-width:90%;
+    text-align:center;
+}
+
+.corpus-catalogue li {
+    margin:0 0 5px 0;
+    padding:8px 13px;
+    list-style: none;
+    display:inline-block;
+    background-color:#000;
+    text-align:center;
+    opacity:0.6;
+    transition:opacity 0.15s;
+    cursor:pointer;
+}
+
+.corpus-catalogue li:hover, .corpus-catalogue li.selected {
+    opacity:1.0;
+    text-shadow:0 0 1px #FFF;
+}
+
+.speaker {
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    display:block;
+    width:16px;
+    height:16px;
+    background-image:url(./assets/speaker.png);
+    background-size: cover;
+    opacity:1.0;
+}
+
+.speaker.mute {
+    opacity:0.3;
+}
+
+/*
+footer {
+    font-family: 'Esteban', serif;
+    position:absolute;
+    bottom:3px;
+    font-size:10px;
+    margin: 0 auto;
+    text-align:center;
+    width:100%;
+}
+
+footer a, footer a:visited {
+    margin: 0 2px;
+    color: #FFF;
+    font-weight:700;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #CCC;
+}
+*/
+
+.start-button {
+    position:relative;
+    overflow:hidden;
+    display:block;
+    text-align:center;
+    width:200px;
+    height:200px;
+    border-radius: 100px;
+    background-color:#FFF;
+    color:#000;
+    text-decoration:none;
+    margin:90px auto;
+}
+
+.start-button span {
+    display:block;
+    margin-top:81px;
+    font-size:38px;
+    line-height:38px;
+    letter-spacing:1px;
+    text-shadow:0 0 2px #999;
+}
+
+@media only screen and (max-width: 660px) {
+    h1 {
+        font-size:35px;
+        padding: 9% 0 0 0;
+    }
+
+    h2 {
+        font-size:12px;
+        margin-top:-3px;
+    }
+
+    .generation {
+        font-size:32px;
+        margin:30px 0 25px 0;
+        padding:27px;
+    }
+}

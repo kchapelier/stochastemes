@@ -3,8 +3,12 @@
 var dataCatalogue = require('./data-catalogue'),
     speak = require('./functions/speak');
 
+var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+
 var app = {
     init: function () {
+        this.startButtonElement = document.getElementsByClassName('start-button')[0];
+        this.mainElement = document.getElementsByClassName('main')[0];
         this.corpusElement = document.getElementsByClassName('corpus-catalogue')[0];
         this.corpusChoices = this.corpusElement.getElementsByTagName('li');
         this.generationElement = document.getElementsByClassName('generation-result')[0];
@@ -13,6 +17,13 @@ var app = {
         this.selectedCorpus = null;
         this.running = true;
         this.voiced = speak.supported;
+
+        if (iOS) {
+            this.displayStartButton();
+        } else {
+            this.displayMain();
+            this.start();
+        }
 
         this.setEvents();
 
@@ -42,12 +53,30 @@ var app = {
             this.generationElement.innerHTML = text[0].toUpperCase() + text.substr(1);
         }
     },
+    start: function () {
+        var self = this;
+        setInterval(function () {
+            if (self.running) {
+                self.next();
+            }
+        }, 2500);
+    },
+    displayStartButton: function () {
+        this.startButtonElement.style.display = 'block';
+        this.mainElement.style.display = 'none';
+    },
+    displayMain: function () {
+        this.startButtonElement.style.display = 'none';
+        this.mainElement.style.display = 'block';
+    },
     setEvents: function () {
         var self = this;
 
         if (speak.supported) {
             this.voiced = true;
             this.speakerElement.addEventListener('click', function (e) {
+                e.preventDefault();
+
                 self.voiced = !self.voiced;
 
                 self.speakerElement.className = 'speaker' + (self.voiced ? '' : ' mute');
@@ -65,11 +94,14 @@ var app = {
             }
         });
 
-        setInterval(function () {
-            if (self.running) {
-                self.next();
-            }
-        }, 2500);
+        this.startButtonElement.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            speak.speak(' ', 'fr-FR'); // hack for safari being dumb
+
+            self.displayMain();
+            self.start();
+        });
 
         this.observePageVisibility();
     },
