@@ -73,7 +73,6 @@ var app = {
         var self = this;
 
         if (speak.supported) {
-            this.voiced = true;
             this.speakerElement.addEventListener('click', function (e) {
                 e.preventDefault();
 
@@ -82,7 +81,6 @@ var app = {
                 self.speakerElement.className = 'speaker' + (self.voiced ? '' : ' mute');
             });
         } else {
-            this.voiced = false;
             this.speakerElement.style.display = 'none';
         }
 
