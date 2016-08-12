@@ -8,5 +8,8 @@
     "build": "browserify src/index.js -d --s app -u crypto | uglifyjs > build/main.js"
   },
   "author": "Kevin Chapelier <kevin.chapelier@gmail.com> (http://www.kchapelier.com/)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ngram-word-generator": "^1.0.0"
+  }
 }

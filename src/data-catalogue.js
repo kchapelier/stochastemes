@@ -1,12 +1,12 @@
 "use strict";
 
-var generator = require('./functions/generator'),
+var makeGenerator = require('ngram-word-generator'),
     get = require('./functions/get');
 
 var dataCatalogue = {
     catalogue: {
         baudelaire: {
-            file: './data/baudelaire.json?v=2',
+            file: './data/baudelaire.json?v=3',
             name: 'C.Baudelaire (Les Fleurs du Mal)',
             lang: 'fr-FR',
             generate: null,
@@ -14,7 +14,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         wordsworth: {
-            file: './data/wordsworth.json?v=2',
+            file: './data/wordsworth.json?v=3',
             name: 'W.Wordsworth (The Excursion)',
             lang: 'en-GB',
             generate: null,
@@ -22,7 +22,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         shelley: {
-            file: './data/shelley.json?v=2',
+            file: './data/shelley.json?v=3',
             name: 'P.B.Shelley (selected poems)',
             lang: 'en-GB',
             generate: null,
@@ -30,7 +30,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         leopardi: {
-            file: './data/leopardi.json?v=2',
+            file: './data/leopardi.json?v=3',
             name: 'G.Leopardi (Appressamento Della Morte)',
             lang: 'it-IT',
             generate: null,
@@ -38,7 +38,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         goethe: {
-            file: './data/goethe.json?v=2',
+            file: './data/goethe.json?v=3',
             name: 'J.W. von Goethe (selected poems)',
             lang: 'de-DE',
             generate: null,
@@ -46,7 +46,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         hugo: {
-            file: './data/hugo.json?v=2',
+            file: './data/hugo.json?v=3',
             name: 'V. Hugo (extracts from La Légende des Siècles)',
             lang: 'fr-FR',
             generate: null,
@@ -54,7 +54,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         decastro: {
-            file: './data/decastro.json?v=2',
+            file: './data/decastro.json?v=3',
             name: 'R. de Castro (selected poems)',
             lang: 'es-ES',
             generate: null,
@@ -62,7 +62,7 @@ var dataCatalogue = {
             addWidth: 5
         },
         wakaandhaiku: {
-            file: './data/wakaandhaiku.json?v=2',
+            file: './data/wakaandhaiku.json?v=3',
             name: 'Various (selected waka and haiku poems)',
             lang: 'ja-JP',
             generate: null,
@@ -80,7 +80,7 @@ var dataCatalogue = {
                 if (error) {
                     callback(error, self.catalogue[id]);
                 } else {
-                    self.catalogue[id].generate = generator(JSON.parse(text));
+                    self.catalogue[id].generate = makeGenerator(JSON.parse(text));
                     callback(null, self.catalogue[id]);
                 }
             });
